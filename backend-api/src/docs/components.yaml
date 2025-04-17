@@ -1,0 +1,185 @@
+#Common references
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        MA_SACH:
+          type: string
+          example: Mã sách
+          description: Book ID
+        TEN_SACH:
+          type: string
+          example: Tên sách
+          description: Book name
+        MO_TA:
+          type: string
+          example: Mô tả sách
+          description: Brief infomation of the book
+        THE_LOAI:
+          type: string
+          example: Thể loại sách
+          description: Book type
+        TAC_GIA:
+          type: string
+          example: Tác giả sách
+          description: Book author
+        NHA_XUAT_BAN:
+          type: string
+          example: Nhà xuất bản
+          description: Book publisher
+        GIA_BAN:
+          type: integer
+          example: 10000
+          description: Book selling price
+        ANH_BIA:
+          type: string
+          example: "/uploads/example.jpg"
+          description: Content of book image
+          readOnly: true
+        TRANG_THAI:
+          type: integer
+          example: 1
+          description: Book state
+    Cart:
+      type: object
+      properties:
+        MA_GIO_HANG:
+          type: string
+          description: Unique identifier for the cart
+          example: "cart123"
+        TEN_TAI_KHOAN:
+          type: string
+          description: User associated with the cart
+          example: "user456"
+        TRANG_THAI:
+          type: integer
+          description: Current state of the cart
+          example: 0
+        NGAY_TAO:
+          type: string
+          description: The date the cart was created
+          example: "2024-10-21"
+        TEN_NGUOI_NHAN:
+          type: string
+          description: Name of the recipient for the cart
+          example: "John Doe"
+        SO_DIEN_THOAI:
+          type: string
+          description: Phone number of the recipient
+          example: "0123456789"
+        DIA_CHI_NHAN:
+          type: string
+          description: Address for delivery
+          example: "123 Main St, Anytown, USA"
+        books:
+          type: array
+          description: List of books in the cart
+          items:
+            $ref: "#/components/schemas/Item"
+    Item:
+      type: object
+      properties:
+        MA_SACH:
+          type: string
+          example: Mã sách
+          description: Book ID
+        TEN_SACH:
+          type: string
+          example: Tên sách
+          description: Book name
+        MO_TA:
+          type: string
+          example: Mô tả sách
+          description: Brief infomation of the book
+        THE_LOAI:
+          type: string
+          example: Thể loại sách
+          description: Book type
+        TAC_GIA:
+          type: string
+          example: Tác giả sách
+          description: Book author
+        NHA_XUAT_BAN:
+          type: string
+          example: Nhà xuất bản
+          description: Book publisher
+        ANH_BIA:
+          type: string
+          example: "/uploads/example.jpg"
+          description: Content of book image
+          readOnly: true
+        SO_LUONG:
+          type: integer
+          example: 2
+          description: Number of books buying
+        GIA_MUA:
+          type: integer
+          example: 10000
+          description: Book selling price
+  responses:
+    "200":
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status
+                enum:
+                  - success
+              data:
+                type: object
+                nullable: true
+                default: null
+                description: The response data
+    "400":
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status
+                enum:
+                  - fail
+              message:
+                type: object
+                nullable: true
+                default: null
+                description: The response message
+    "500":
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status
+                enum:
+                  - error
+              message:
+                type: object
+                nullable: true
+                default: null
+                description: The response message
+    "404":
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                description: The response status
+                enum:
+                  - fail
+              message:
+                type: object
+                nullable: true
+                default: null
+                description: The response message
+  parameters:
